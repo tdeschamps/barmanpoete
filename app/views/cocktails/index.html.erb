@@ -1,0 +1,19 @@
+<h1>Les cocktails du barman poete</h1>
+
+<div class="container">
+  <% @cocktails.each do |cocktail| %>
+  <div class="col-xs-4">
+    <div>
+      <%= cocktail.name %>
+    </div>
+    <div>
+      <%= image_tag cocktail.photo_url %>
+    </div>
+    <% cocktail.dosages.all.each do |dosage| %>
+      <div>
+        <%= Ingredient.find(dosage.ingredient_id).name %> <%= dosage.mix %> cl
+      </div>
+    <% end %>
+
+  <% end %>
+</div>
