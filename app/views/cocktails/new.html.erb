@@ -1,3 +1,30 @@
-<h1>Les cocktails du barman poete</h1>
+<h1>Balance ta recette, Bro</h1>
+<div class="container">
+  <div class="form-container">
+    <div class="form-group col-xs-4">
+      <%= form_for @cocktail do |f|%>
+        <div id="cocktail-info">
+            <div>
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+            <div>
+              <%= f.label :photo %>
+              <%= f.text_field :photo_url, value: "Balance ta tof batard", class: "form-control" %>
+            </div>
+        </div>
+        <div id="ingredients">
+          <%= f.fields_for :dosages, Dosage.new do |dosage| %>
+            <ol>
+              <%= render 'dosage_fields', f: dosage %>
+            </ol>
+          <% end %>
+          <%= link_to_add_association 'add ingredient', f, :dosages, 'data-association-insertion-node' => "#ingredients ol", 'data-association-insertion-method' => "append", :wrap_object => Proc.new {|dosage| dosage.build_ingredient; dosage } %>
+        </div>
 
-<% @cocktails.each do |cocktail| %>
+        <%= f.submit %>
+
+      <% end %>
+    </div>
+  </div>
+</div>

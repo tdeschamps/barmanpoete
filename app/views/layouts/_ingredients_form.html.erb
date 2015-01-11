@@ -1,0 +1,10 @@
+<li class="control-group nested-fields">
+  <div class="controls">
+    <%= f.label :mix, "Dosage:" %>
+    <%= f.text_field :mix %>
+
+    <%= f.fields_for :ingredient do |quantity_ingredient| %>
+      <%= quantity_ingredient.text_field :name %>
+    <% end %>
+  </div>
+</li>
